@@ -1,0 +1,12 @@
+--class-path src
+--main Main
+
+--library hxnodejs
+
+--js nodejs/main.js
+
+-cmd node nodejs/main.js
+
+-D no-deprecation-warnings
+
+-D dump=pretty

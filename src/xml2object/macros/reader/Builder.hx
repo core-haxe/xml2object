@@ -148,6 +148,14 @@ class Builder {
                             } else if (node.hasChild($v{nodeName}) && node.hasChildText($v{nodeName})) {
                                 object.$varName = Std.parseFloat(node.childText($v{nodeName}));
                             });
+                        case "Date":
+                            var defaultValue = macro null;
+                            exprs.push(macro object.$varName = $e{defaultValue});
+                            exprs.push(macro if (node.hasAttr($v{nodeName})) {
+                                object.$varName = xml2object.util.StringUtil.stringToDate(node.attr($v{nodeName}));
+                            } else if (node.hasChild($v{nodeName}) && node.hasChildText($v{nodeName})) {
+                                object.$varName = xml2object.util.StringUtil.stringToDate(node.childText($v{nodeName}));
+                            });
                         case _:
                             switch (field.type) {
                                 case TInst(t, params):

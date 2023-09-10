@@ -58,6 +58,9 @@ class XmlDocument {
         var count = 0;
         var first = true;
         for (element in elements) {
+            if (element.firstChild() == null) {
+                continue;
+            }
             if (first == true) {
                 text = element.firstChild().nodeValue;
                 first = false;

@@ -1,5 +1,6 @@
 package xml2object.macros.reader;
 
+import haxe.macro.ExprTools;
 import haxe.macro.Context;
 import haxe.macro.Type;
 import haxe.macro.Expr;
@@ -61,8 +62,11 @@ class Builder {
                 var varName = field.name;
                 var varType = TypeTools.toString(field.type);
                 var nodeName = varName;
+                if (field.meta.has(":xmlName")) {
+                    nodeName = ExprTools.toString(field.meta.extract(":xmlName")[0].params[0]).replace("\"", "").replace("'", "");
+                }
 
-                var isValue = (varName == "value");
+                var isValue = field.meta.has(":nodeValue");
                 var isNullable = true;
 
                 if (isValue) {
